@@ -2,12 +2,20 @@ import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_56/dio_helper.dart';
 import 'package:flutter_56/login_screen.dart';
+import 'package:flutter_56/news_screen.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
   await DioHelper.initDioHelper();
 
+
+  Map <String,dynamic>map = {
+    "key" : "value" ,
+    "key1" : "value1" ,
+  }; 
+
+  print(map["key"]) ; 
   runApp(const MyApp());
 }
 
@@ -38,7 +46,7 @@ class MyApp extends StatelessWidget {
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         useMaterial3: true,
       ),
-      home: LoginScreen(),
+      home: NewsScreen(),
     );
   }
 }
