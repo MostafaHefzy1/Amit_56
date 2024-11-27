@@ -1,6 +1,7 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_56/cubit/logic_cubit.dart';
+import 'package:flutter_56/details_news.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class NewsScreen extends StatelessWidget {
@@ -31,40 +32,58 @@ class NewsScreen extends StatelessWidget {
             ),
             body: state is GetNewsSuccess
                 ? ListView.separated(
-                    itemBuilder: (context, index) => Container(
-                          height: 150,
-                          child: ListTile(
-                            leading: CachedNetworkImage(
-                              imageUrl:
-                                  state.newsModel.articles![index].urlToImage ??
-                                      "",
-                              placeholder: (context, url) => Center(
-                                  child: const CircularProgressIndicator()),
-                              errorWidget: (context, url, error) =>
-                                  const Icon(Icons.error),
-                              height: 100,
-                              width: 100,
-                            ),
-                            title: Text(
-                              state.newsModel.articles![index].title ?? "",
-                              maxLines: 1,
-                              overflow: TextOverflow.ellipsis,
-                            ),
-                            subtitle: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Text(
-                                  state.newsModel.articles![index].content ??
-                                      "",
-                                  maxLines: 3,
-                                  overflow: TextOverflow.ellipsis,
-                                ),
-                                Text(
-                                  state.newsModel.articles![index].author ?? "",
-                                  maxLines: 1,
-                                  overflow: TextOverflow.ellipsis,
-                                ),
-                              ],
+                    itemBuilder: (context, index) => InkWell(
+                          onTap: () {
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => DetailsNewsScreen(
+                                        title: state.newsModel.articles![index]
+                                                .title ??
+                                            "",
+                                        desc: state.newsModel.articles![index]
+                                                .content ??
+                                            "",
+                                        imageUrl: state.newsModel
+                                                .articles![index].urlToImage ??
+                                            "")));
+                          },
+                          child: Container(
+                            height: 150,
+                            child: ListTile(
+                              leading: CachedNetworkImage(
+                                imageUrl: state.newsModel.articles![index]
+                                        .urlToImage ??
+                                    "",
+                                placeholder: (context, url) => Center(
+                                    child: const CircularProgressIndicator()),
+                                errorWidget: (context, url, error) =>
+                                    const Icon(Icons.error),
+                                height: 100,
+                                width: 100,
+                              ),
+                              title: Text(
+                                state.newsModel.articles![index].title ?? "",
+                                maxLines: 1,
+                                overflow: TextOverflow.ellipsis,
+                              ),
+                              subtitle: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Text(
+                                    state.newsModel.articles![index].content ??
+                                        "",
+                                    maxLines: 3,
+                                    overflow: TextOverflow.ellipsis,
+                                  ),
+                                  Text(
+                                    state.newsModel.articles![index].author ??
+                                        "",
+                                    maxLines: 1,
+                                    overflow: TextOverflow.ellipsis,
+                                  ),
+                                ],
+                              ),
                             ),
                           ),
                         ),

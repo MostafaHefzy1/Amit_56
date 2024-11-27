@@ -9,28 +9,22 @@ class DioHelper {
     dio = Dio(BaseOptions(
         baseUrl: "https://newsapi.org/v2/",
         receiveDataWhenStatusError: true,
-        headers: {
-          //  "Authorization": 'Bearer ',
-        }));
+        // headers: {
+        //   //  "Authorization": 'Bearer ',
+        // }
+        ));
 
     // customization
     dio!.interceptors.add(PrettyDioLogger(
-        requestHeader: true,
-        requestBody: true,
-        responseBody: true,
-        responseHeader: false,
-        error: true,
-        compact: true,
-        maxWidth: 90,
-        enabled: kDebugMode,
-        filter: (options, args) {
-          // don't print requests with uris containing '/posts'
-          if (options.path.contains('/posts')) {
-            return false;
-          }
-          // don't print responses with unit8 list data
-          return !args.isResponse || !args.hasUint8ListData;
-        }));
+      requestHeader: true,
+      requestBody: true,
+      responseBody: true,
+      responseHeader: false,
+      error: true,
+      compact: true,
+      maxWidth: 90,
+      enabled: kDebugMode,
+    ));
   }
 
   static Future<Response> getData(

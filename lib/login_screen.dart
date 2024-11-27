@@ -27,7 +27,36 @@ class LoginScreen extends StatelessWidget {
                 key: formKey,
                 child: Column(
                   children: [
-                    
+                    TextFormField(
+                      controller: emailController,
+                      validator: (value) {
+                        print("value $value");
+                        if (value!.isEmpty) {
+                          return "error";
+                        }
+                      },
+                      decoration: InputDecoration(
+                          hintText: "Emails",
+                          border: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(10))),
+                    ),
+                    const SizedBox(
+                      height: 10,
+                    ),
+                    TextFormField(
+                      controller: passwordController,
+                      decoration: InputDecoration(
+                          hintText: "Pass",
+                          border: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(10))),
+                    ),
+                    TextButton(
+                        onPressed: () {
+                          if (formKey.currentState!.validate()) {
+                            // cubit.loginFirebase
+                          }
+                        },
+                        child: const Text("data"))
                   ],
                 ),
               ),
